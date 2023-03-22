@@ -1,0 +1,169 @@
+{
+	"info": {
+		"_postman_id": "0948bd6c-4dad-46d9-b18c-2a6a42d3a635",
+		"name": "case study",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26158056"
+	},
+	"item": [
+		{
+			"name": "create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"const Id= pm.response.json();",
+							"pm.environment.set(\"idvalue\", Id.ID);",
+							"",
+							"// const authorData= JSON.parse(responseBody);",
+							"// pm.environment.set(\"authorName\", authorData.author);",
+							"",
+							"let authorData= JSON.parse(pm.request.body.raw).author;",
+							"pm.environment.set('authorName', authorData);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\":\"edition1\",\n\"isbn\":\"rithica\",\n\"aisle\":\"1980123346\",\n\"author\":\"rithica12\"\n}\n \n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base}}Library/Addbook.php",
+					"host": [
+						"{{base}}Library"
+					],
+					"path": [
+						"Addbook.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get by name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base}}Library/GetBook.php?AuthorName={{authorName}}",
+					"host": [
+						"{{base}}Library"
+					],
+					"path": [
+						"GetBook.php"
+					],
+					"query": [
+						{
+							"key": "AuthorName",
+							"value": "{{authorName}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fetch by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base}}Library/GetBook.php?ID={{idvalue}}",
+					"host": [
+						"{{base}}Library"
+					],
+					"path": [
+						"GetBook.php"
+					],
+					"query": [
+						{
+							"key": "ID",
+							"value": "{{idvalue}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"ID\" : \"{{idvalue}}\"\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base}}Library/DeleteBook.php",
+					"host": [
+						"{{base}}Library"
+					],
+					"path": [
+						"DeleteBook.php"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

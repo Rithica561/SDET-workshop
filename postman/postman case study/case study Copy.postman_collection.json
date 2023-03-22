@@ -1,0 +1,155 @@
+{
+	"info": {
+		"_postman_id": "e0a32f37-2703-4287-8686-ad2792c5b41a",
+		"name": "case study Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26158056"
+	},
+	"item": [
+		{
+			"name": "create DDT",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"const Id= pm.response.json();",
+							"pm.environment.set(\"idvalue\", Id.ID);",
+							"",
+							"let authorData= JSON.parse(pm.request.body.raw).author;",
+							"pm.environment.set('authorName', authorData);",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"// const authorData= JSON.parse(responseBody);",
+							"// pm.environment.set(\"authorName\", authorData.author);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\":\"{{name}}\",\n\"isbn\":\"{{isbn}}\",\n\"aisle\":\"{{aisle}}\",\n\"author\":\"{{author}}\"\n}\n \n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base}}{{post}}",
+					"host": [
+						"{{base}}{{post}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get by name DDT",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base}}{{getName}}",
+					"host": [
+						"{{base}}{{getName}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fetch by id DDT",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base}}{{getId}}",
+					"host": [
+						"{{base}}{{getId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete DDT",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"ID\" : \"{{idvalue}}\"\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base}}{{delete}}",
+					"host": [
+						"{{base}}{{delete}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
